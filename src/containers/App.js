@@ -1,40 +1,32 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import CardList from '../components/CardList';
 import SearchBox from '../components/SearchBox';
-import Scroll from '../components/Scroll';
 import { members } from '../members';
 import './App.css';
 
-class App extends Component {
-    constructor() {
-        super()
-        this.state = {
-            members: members,
-            searchField: ''
-        }
+function App() {
+    const [cardInfo] = useState(members);
+    const [searchField, setSearchField] = useState(''); 
+
+    const onSearchChange = (event) => {
+        setSearchField(event.target.value)       
     }
 
-    onSearchChange = (event) => {
-        this.setState({ searchField: event.target.value })       
-    }
+    const filteredMembers = members.filter(member => 
+        member.name.toLowerCase().includes(searchField.toLowerCase()))
 
-    render () {
-        const { members, searchField } = this.state;
-        const filteredMembers = members.filter(member => {
-            return member.name.toLowerCase().includes(searchField.toLowerCase());
-        }) 
-        return !members.length ?
-            <h1>Loading...</h1> :
+    return !cardInfo.length ?
+        <h1>Loading...</h1> :
             (
-                <div className='tc'>
-                    <img className='logo' src='./img/loona-logo.png' alt='loona logo' />
-                    <SearchBox searchChange={this.onSearchChange}/>
-                    <Scroll>
-                        <CardList members={filteredMembers} />
-                    </Scroll>
+                <div className='tc pa4'>
+                    <img 
+                        className='logo pb3' 
+                        src='./img/loona-logo.png' 
+                        alt='loona logo' />
+                    <SearchBox searchChange={onSearchChange} />
+                    <CardList cardInfo={filteredMembers} />
                 </div>
             );
-    }
 }
 
 export default App;

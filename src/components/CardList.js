@@ -1,22 +1,24 @@
 import React from 'react';
 import Card from './Card';
 
-const CardList = ( { members }) => {
+const CardList = ( { cardInfo }) => {
     return (
-        <div>
-           {
-               members.map( (_user, i) => {
-                return (
-                    <Card 
-                      key={members[i].id} 
-                      img={members[i].img} 
-                      name={members[i].name} 
-                      color={members[i].color} 
-                      animal={members[i].animal}
-                    />
-                );
-            })
-           }
+        <div className='flex'>
+            <div className='flex flex-wrap justify-around'>
+            {
+                cardInfo.map( (_user, i) => {
+                    return (
+                        <Card 
+                        key={cardInfo[i].id} 
+                        img={cardInfo[i].img} 
+                        name={cardInfo[i].name} 
+                        color={cardInfo[i].color} 
+                        animal={cardInfo[i].animal}
+                        />
+                    );
+                })
+            }
+            </div>
         </div>
     );
 }
