@@ -4,6 +4,7 @@ import Card from './Card';
 const CardList = ( { cardInfo }) => {
     return (
         <div className='flex'>
+            <div></div>
             <div className='flex flex-wrap justify-around'>
             {
                 cardInfo.map( (_user, i) => {
@@ -19,6 +20,7 @@ const CardList = ( { cardInfo }) => {
                 })
             }
             </div>
+            <div></div>
         </div>
     );
 }
